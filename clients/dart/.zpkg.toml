@@ -1,0 +1,13 @@
+[package]
+org = "anticaptrad"
+name = "act-clients-dart"
+version = "0.1.0"
+description = "dart client for act-clients"
+license = "MIT"
+
+[package.repository]
+vcs = "git"
+url = "https://github.com/anticaptrad/act-clients"
+
+[publish]
+exclude = []
