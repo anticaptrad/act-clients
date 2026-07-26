@@ -1,0 +1,31 @@
+[package]
+org = "anticaptrad"
+name = "act-clients"
+version = "0.1.0"
+description = "Official polyglot clients for Anticapitalist Tradition"
+license = "MIT"
+keywords = ["clients", "sdk", "polyglot", "anticaptrad"]
+
+[package.repository]
+vcs = "git"
+url = "https://github.com/anticaptrad/act-clients"
+
+[publish]
+include_readme = true
+tag_format = "v{version}"
+exclude = [".env", ".env.*", ".direnv/**", ".zed-pack/**", "tmp/**", "**/*.log", ".DS_Store"]
+
+[targets.repository]
+dir = "."
+name = "act-clients-repository"
+
+[targets.nodejs]
+dir = "clients/typescript"
+name = "act-clients-nodejs"
+adapter = "node"
+
+[targets.rust]
+dir = "clients/rust"
+
+[targets.dart]
+dir = "clients/dart"
