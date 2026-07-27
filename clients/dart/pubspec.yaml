@@ -1,0 +1,14 @@
+name: anticaptrad_client
+description: Dart client for Anticapitalist Tradition service probes.
+version: 0.1.0
+repository: https://github.com/anticaptrad/act-clients
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  http: ^1.5.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.0

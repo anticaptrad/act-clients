@@ -1,0 +1,11 @@
+node_modules/
+target/
+.dart_tool/
+.packages
+pubspec.lock
+.zed-pack/
+.zed/
+.env
+.env.*
+*.log
+.DS_Store
