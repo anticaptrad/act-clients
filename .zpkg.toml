@@ -24,8 +24,21 @@ dir = "clients/typescript"
 name = "act-clients-nodejs"
 adapter = "node"
 
+[targets.nodejs.native]
+registry = "npm"
+package = "@anticaptrad/client"
+forge = ["github-packages", "gitlab-packages", "bitbucket-packages"]
+
 [targets.rust]
 dir = "clients/rust"
 
+[targets.rust.native]
+registry = "crates-io"
+package = "anticaptrad-client"
+
 [targets.dart]
 dir = "clients/dart"
+
+[targets.dart.native]
+registry = "pub.dev"
+package = "anticaptrad_client"
