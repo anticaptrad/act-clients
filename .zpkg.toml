@@ -13,7 +13,7 @@ url = "https://github.com/anticaptrad/act-clients"
 [publish]
 include_readme = true
 tag_format = "v{version}"
-exclude = [".env", ".env.*", ".direnv/**", ".zed-pack/**", "tmp/**", "**/*.log", ".DS_Store"]
+exclude = [".env", ".env.*", ".direnv/**", ".zed-pack/**", "tmp/**", "**/*.log", ".DS_Store", "benches/**"]
 
 [targets.repository]
 dir = "."

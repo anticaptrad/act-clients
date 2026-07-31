@@ -1,0 +1,14 @@
+/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/deps/serde-bebd0069d3e36ad9.d: /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/build/serde-0afbdce282a9c748/out/private.rs
+
+/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/deps/libserde-bebd0069d3e36ad9.rlib: /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/build/serde-0afbdce282a9c748/out/private.rs
+
+/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/deps/libserde-bebd0069d3e36ad9.rmeta: /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/build/serde-0afbdce282a9c748/out/private.rs
+
+/Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/Users/maca5/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/build/serde-0afbdce282a9c748/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/build/serde-0afbdce282a9c748/out
