@@ -95,4 +95,3 @@ adapter = "none"
 
 [dependencies]
 "anticaptrad/act-interfaces" = "^0.1.0"
-"anticaptrad/act-lib" = "^0.1.0"
