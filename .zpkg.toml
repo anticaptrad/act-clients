@@ -31,6 +31,7 @@ forge = ["github-packages", "gitlab-packages", "bitbucket-packages"]
 
 [targets.rust]
 dir = "clients/rust"
+adapter = "rust"
 
 [targets.rust.native]
 registry = "crates-io"
@@ -38,7 +39,60 @@ package = "anticaptrad-client"
 
 [targets.dart]
 dir = "clients/dart"
+adapter = "dart"
 
 [targets.dart.native]
 registry = "pub.dev"
 package = "anticaptrad_client"
+
+[targets.gleamlang]
+dir = "clients/gleamlang"
+adapter = "none"
+
+[targets.erlang]
+dir = "clients/erlang"
+adapter = "none"
+
+[targets.elixir]
+dir = "clients/elixir"
+adapter = "none"
+
+[targets.java]
+dir = "clients/java"
+adapter = "java"
+
+[targets.golang]
+dir = "clients/golang"
+adapter = "go"
+
+[targets.python3]
+dir = "clients/python3"
+adapter = "none"
+
+[targets.ruby]
+dir = "clients/ruby"
+adapter = "none"
+
+[targets.php]
+dir = "clients/php"
+adapter = "none"
+
+[targets.typescript-nodejs]
+dir = "clients/typescript/nodejs"
+adapter = "node"
+
+[targets.typescript-deno]
+dir = "clients/typescript/deno"
+adapter = "none"
+
+[targets.typescript-bun]
+dir = "clients/typescript/bun"
+adapter = "node"
+
+[targets.typescript-edge]
+dir = "clients/typescript/edge"
+adapter = "none"
+
+[dependencies]
+"anticaptrad/act-interfaces" = "^0.1.0"
+"anticaptrad/act-lib" = "^0.1.0"
