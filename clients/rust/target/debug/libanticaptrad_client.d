@@ -1,1 +1,0 @@
-/Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/debug/libanticaptrad_client.rlib: /Users/maca5/codes/anticaptrad/act-clients/clients/rust/target/package/anticaptrad-client-0.1.0/src/lib.rs
