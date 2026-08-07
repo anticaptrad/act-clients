@@ -9,3 +9,7 @@ pubspec.lock
 .env.*
 *.log
 .DS_Store
+tmp
+temp
+tmp/worktrees
+temp/worktrees
