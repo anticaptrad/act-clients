@@ -1,0 +1,1 @@
+{"name":"anticaptrad/client","description":"Anticaptrad API client","license":"MIT","autoload":{"psr-4":{"Anticaptrad\\":"src/"}},"require":{"php":">=8.2"}}

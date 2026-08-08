@@ -1,26 +1,20 @@
 {
   "name": "@anticaptrad/client",
   "version": "0.1.0",
-  "description": "TypeScript client for Anticapitalist Tradition service probes",
+  "description": "TypeScript and JavaScript client for Anticapitalist Tradition service probes",
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./node": "./src/node.js",
+    "./deno": "./src/deno.js",
+    "./bun": "./src/bun.js",
+    "./edge": "./src/edge.js"
+  },
   "types": "./src/index.d.ts",
-  "files": [
-    "src"
-  ],
-  "scripts": {
-    "test": "node --test test.mjs"
-  },
-  "engines": {
-    "node": ">=22"
-  },
+  "files": ["src"],
+  "scripts": {"test": "node --test test.mjs"},
+  "engines": {"node": ">=22"},
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anticaptrad/act-clients.git",
-    "directory": "clients/typescript"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+  "repository": {"type": "git", "url": "git+https://github.com/anticaptrad/act-clients.git", "directory": "clients/typescript"},
+  "publishConfig": {"access": "public"}
 }
