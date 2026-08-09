@@ -1,0 +1,20 @@
+name: required-client-matrix
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with: {python-version: '3.12'}
+      - run: python3 scripts/verify-client-matrix.py
+      - run: cc -std=c11 -Wall -Wextra -Werror -c clients/c/act_client.c -o /tmp/act_client.o
+      - run: printf '#include "clients/cpp/act_client.hpp"\nint main(){ anticaptrad::Client c("https://example.invalid"); return c.health_url().empty(); }\n' | c++ -std=c++20 -Wall -Wextra -Werror -I. -x c++ - -o /tmp/act_cpp
+      - run: node --check clients/typescript/src/index.js && node --check clients/typescript/src/edge.js
