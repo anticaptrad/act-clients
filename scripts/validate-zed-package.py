@@ -31,6 +31,12 @@ def read_toml(path: pathlib.Path) -> dict:
         return tomllib.load(handle)
 
 
+def target_package_name(package: dict, target: str, section: dict) -> str:
+    """Mirror zed-cli naming: the repository target keeps the package name."""
+    default_name = package["name"] if target == "repository" else f"{package['name']}-{target}"
+    return section.get("name", default_name)
+
+
 def validate_manifest(root: pathlib.Path) -> tuple[dict, dict]:
     manifest = read_toml(root / ".zpkg.toml")
     if (root / ".zpkg.lock").read_text(encoding="utf-8").strip() != "version = 1":
@@ -57,6 +63,13 @@ def validate_manifest(root: pathlib.Path) -> tuple[dict, dict]:
     if targets["repository"].get("dir") != ".":
         raise ValueError("repository target must package the repository root")
 
+    expected_names = {
+        target_package_name(package, target, section)
+        for target, section in targets.items()
+    }
+    if len(expected_names) != len(targets):
+        raise ValueError("Zed target package names must be unique")
+
     for target, names in NATIVE_MANIFESTS.items():
         source = root / targets[target]["dir"]
         if not source.is_dir():
@@ -77,7 +90,7 @@ def validate_artifacts(
     package = manifest["package"]
     expected: dict[str, pathlib.Path] = {}
     for target, section in targets.items():
-        name = section.get("name", f"{package['name']}-{target}")
+        name = target_package_name(package, target, section)
         expected[target] = artifacts / f"{package['org']}-{name}-{package['version']}.tar.gz"
 
     missing = sorted(archive.name for archive in expected.values() if not archive.is_file())
@@ -99,7 +112,7 @@ def validate_artifacts(
             if derived_file is None:
                 raise ValueError(f"{target} artifact omitted its derived manifest")
             derived = tomllib.load(io.BytesIO(derived_file.read()))
-        expected_name = targets[target].get("name", f"{package['name']}-{target}")
+        expected_name = target_package_name(package, target, targets[target])
         if derived["package"]["name"] != expected_name:
             raise ValueError(f"{target} artifact has the wrong package name")
         if derived.get("targets"):
