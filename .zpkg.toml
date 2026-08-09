@@ -26,7 +26,6 @@ exclude = [".vendor/.zed/**", "**/target/**", "**/node_modules/**", "**/.dart_to
 
 [targets.repository]
 dir = "."
-name = "act-clients-repository"
 
 [targets.nodejs]
 dir = "clients/typescript"
