@@ -2,63 +2,55 @@ name: Zed-Pkg Validation
 
 on:
   push:
-    branches: [ "main", "feat/*" ]
+    branches: [main, "feat/*"]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Validate Zed Manifests
+          python-version: "3.12"
+      - name: Validate the single root package envelope
         run: |
-          python -c '
-          import os
+          python - <<'PY'
+          from pathlib import Path
           import tomllib
-          import sys
 
-          success = True
-          for root, dirs, files in os.walk("."):
-              # Skip build directories or .git
-              if any(skip in root for skip in [".git", "target", "node_modules", ".claude", "tmp"]):
-                  continue
-              if ".zpkg.toml" in files:
-                  path = os.path.join(root, ".zpkg.toml")
-                  print(f"Validating {path}...")
-                  try:
-                      with open(path, "rb") as f:
-                          data = tomllib.load(f)
-                      
-                      if "package" not in data and "workspace" not in data:
-                          print(f"  Error: {path} is missing [package] or [workspace]")
-                          success = False
-                          
-                      if "package" in data:
-                          pkg = data["package"]
-                          if not all(k in pkg for k in ("org", "name", "version")):
-                              print(f"  Error: {path} [package] is missing org, name, or version")
-                              success = False
-                          else:
-                              print(f"  Package OK: {pkg[\"org\"]}/{pkg[\"name\"]} v{pkg[\"version\"]}")
+          root = Path(".")
+          manifests = sorted(
+              path for path in root.rglob(".zpkg.toml")
+              if ".git" not in path.parts and ".vendor" not in path.parts
+          )
+          if manifests != [Path(".zpkg.toml")]:
+              raise SystemExit(
+                  "expected exactly the root .zpkg.toml; found "
+                  + ", ".join(map(str, manifests))
+              )
 
-                      if "workspace" in data:
-                          ws = data["workspace"]
-                          if "members" not in ws:
-                              print(f"  Error: {path} [workspace] is missing members")
-                              success = False
-                          else:
-                              print(f"  Workspace OK: members={ws[\"members\"]}")
+          with Path(".zpkg.toml").open("rb") as handle:
+              manifest = tomllib.load(handle)
+          package = manifest.get("package", {})
+          required = {"org", "name", "version"}
+          missing = required - set(package)
+          if missing:
+              raise SystemExit(f"root package is missing fields: {sorted(missing)}")
+          if package["org"] != "anticaptrad" or package["name"] != "act-clients":
+              raise SystemExit("unexpected package identity")
 
-                  except Exception as e:
-                      print(f"  Error parsing {path}: {e}")
-                      success = False
+          if Path(".zpkg.lock").read_text(encoding="utf-8").strip() != "version = 1":
+              raise SystemExit(".zpkg.lock must contain exactly 'version = 1'")
 
-          if not success:
-              sys.exit(1)
-          print("\nAll manifests are structurally valid.")
-          '
+          for target, section in manifest.get("targets", {}).items():
+              directory = Path(section["dir"])
+              if not directory.is_dir():
+                  raise SystemExit(f"target {target!r} points at missing directory {directory}")
+
+          print(f"validated {package['org']}/{package['name']} v{package['version']}")
+          PY
