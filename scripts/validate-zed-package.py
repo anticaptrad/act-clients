@@ -32,9 +32,10 @@ def read_toml(path: pathlib.Path) -> dict:
 
 
 def target_package_name(package: dict, target: str, section: dict) -> str:
-    """Mirror zed-cli naming: the repository target keeps the package name."""
-    default_name = package["name"] if target == "repository" else f"{package['name']}-{target}"
-    return section.get("name", default_name)
+    """Mirror zed-cli naming for repository and isolated targets."""
+    if target == "repository":
+        return package["name"]
+    return section.get("name", f"{package['name']}-{target}")
 
 
 def validate_manifest(root: pathlib.Path) -> tuple[dict, dict]:
@@ -62,6 +63,8 @@ def validate_manifest(root: pathlib.Path) -> tuple[dict, dict]:
         raise ValueError(f"target drift: missing={missing}, extras={extras}")
     if targets["repository"].get("dir") != ".":
         raise ValueError("repository target must package the repository root")
+    if "name" in targets["repository"]:
+        raise ValueError("repository target must retain the root package name")
 
     expected_names = {
         target_package_name(package, target, section)
