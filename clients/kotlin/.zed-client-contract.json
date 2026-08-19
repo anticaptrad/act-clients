@@ -1,0 +1,10 @@
+{
+  "apiSurface": "clients/api-surface.json",
+  "apiSurfaceSha256": "4ec122eae7bc41f5c25ba6fbd7c8ca1d8a9a9cfaf9e7f7b4dd38f0a44998ac28",
+  "coordinate": "anticaptrad/act-clients",
+  "runtime": "kotlin",
+  "schemaId": "https://zpkg.tech/schemas/client-api.schema.json",
+  "schemaVersion": 1,
+  "target": "kotlin",
+  "zedTarget": "kotlin"
+}
