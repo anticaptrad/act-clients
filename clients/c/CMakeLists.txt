@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(act_client C)
+add_library(act_client src/act_client.c)
+target_include_directories(act_client PUBLIC include)
+target_compile_features(act_client PUBLIC c_std_11)

@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(anticaptrad_client LANGUAGES CXX)
+add_library(anticaptrad_client INTERFACE)
+target_include_directories(anticaptrad_client INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(anticaptrad_client INTERFACE cxx_std_20)

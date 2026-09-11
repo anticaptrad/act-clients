@@ -1,0 +1,1 @@
+public struct ActClient { private let baseURL: String; public init(baseURL: String) { self.baseURL = baseURL.hasSuffix("/") ? String(baseURL.dropLast()) : baseURL } public func url(_ path: String) -> String { baseURL + (path.hasPrefix("/") ? path : "/" + path) } public var healthURL: String { url("/health") } public var readyURL: String { url("/ready") } }

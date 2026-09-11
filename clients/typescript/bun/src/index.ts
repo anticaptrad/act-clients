@@ -1,9 +1,8 @@
-export interface ClientOptions { baseUrl: string; bearerToken?: string }
+export interface ClientOptions { readonly baseUrl: string; readonly bearerToken?: string }
 export class Client {
   readonly baseUrl: URL;
   readonly bearerToken?: string;
-  constructor(options: ClientOptions) {
-    this.baseUrl = new URL(options.baseUrl);
-    this.bearerToken = options.bearerToken;
-  }
+  constructor(options: ClientOptions) { this.baseUrl = new URL(options.baseUrl); this.bearerToken = options.bearerToken; }
+  async health(): Promise<boolean> { return this.baseUrl.href.length > 0; }
 }
+export function createClient(options: ClientOptions): Client { return new Client(options); }

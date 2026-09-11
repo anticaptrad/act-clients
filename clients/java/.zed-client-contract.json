@@ -1,0 +1,10 @@
+{
+  "apiSurface": "clients/api-surface.json",
+  "apiSurfaceSha256": "13ef0fcf421a3d4fdf4b3ef9f117dca8fcf0c27a7c55f73bac359cf90183b61d",
+  "coordinate": "anticaptrad/act-clients",
+  "runtime": "java",
+  "schemaId": "https://zpkg.tech/schemas/client-api.schema.json",
+  "schemaVersion": 1,
+  "target": "java",
+  "zedTarget": "java"
+}
