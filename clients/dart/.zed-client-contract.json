@@ -1,6 +1,6 @@
 {
   "apiSurface": "clients/api-surface.json",
-  "apiSurfaceSha256": "4ec122eae7bc41f5c25ba6fbd7c8ca1d8a9a9cfaf9e7f7b4dd38f0a44998ac28",
+  "apiSurfaceSha256": "13ef0fcf421a3d4fdf4b3ef9f117dca8fcf0c27a7c55f73bac359cf90183b61d",
   "coordinate": "anticaptrad/act-clients",
   "runtime": "dart",
   "schemaId": "https://zpkg.tech/schemas/client-api.schema.json",

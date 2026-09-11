@@ -1,6 +1,7 @@
 node_modules/
 target/
 .dart_tool/
+.gradle/
 .packages
 pubspec.lock
 .zed-pack/
