@@ -23,7 +23,6 @@ exclude = [".env", ".env.*", ".direnv/**", ".zed-pack/**", ".vendor/.zed/**", "t
 
 [targets.repository]
 dir = "."
-name = "act-clients-repository"
 
 [targets.nodejs]
 dir = "clients/typescript"
@@ -36,23 +35,31 @@ forge = ["github-packages", "gitlab-packages", "bitbucket-packages"]
 
 [targets.python]
 dir = "clients/python"
+adapter = "none"
 [targets.golang]
 dir = "clients/go"
 name = "act-clients-golang"
+adapter = "none"
 [targets.rust]
 dir = "clients/rust"
+adapter = "none"
+
 [targets.rust.native]
 registry = "crates-io"
 package = "anticaptrad-client"
 [targets.dart]
 dir = "clients/dart"
+adapter = "none"
+
 [targets.dart.native]
 registry = "pub.dev"
 package = "anticaptrad_client"
 [targets.ruby]
 dir = "clients/ruby"
+adapter = "none"
 [targets.php]
 dir = "clients/php"
+adapter = "none"
 [targets.java]
 dir = "clients/java"
 adapter = "java"
@@ -63,17 +70,28 @@ adapter = "java"
 dir = "clients/csharp"
 [targets.swift]
 dir = "clients/swift"
+adapter = "none"
 [targets.gleam]
 dir = "clients/gleam"
+adapter = "none"
 [targets.erlang]
 dir = "clients/erlang"
+adapter = "none"
 [targets.elixir]
 dir = "clients/elixir"
+adapter = "none"
 [targets.c]
 dir = "clients/c"
+adapter = "none"
 [targets.cpp]
 dir = "clients/cpp"
+adapter = "none"
 [targets.zig]
 dir = "clients/zig"
+adapter = "none"
 [targets.shell]
 dir = "clients/shell"
+
+[targets.rust-wasm]
+dir = "clients/wasm"
+adapter = "node"
