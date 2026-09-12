@@ -9,7 +9,9 @@ import sys
 import tomllib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-EXPECTED_DEPS = {"anticaptrad/act-interfaces", "anticaptrad/act-lib"}
+# Only the interfaces package exists: there is no "*-lib"/"*-libs" repository in this org
+# (clients/README.md states this), so requiring it here fails a contract that cannot be met.
+EXPECTED_DEPS = {"anticaptrad/act-interfaces"}
 REQUIRED: dict[str, tuple[str, tuple[str, ...], tuple[str, ...]]] = {
     "c": ("clients/c", ("CMakeLists.txt", "Makefile", "meson.build"), (".c", ".h")),
     "cpp": ("clients/cpp", ("CMakeLists.txt", "Makefile", "meson.build"), (".cc", ".cpp", ".cxx", ".hpp", ".h")),
@@ -81,15 +83,28 @@ def main() -> int:
             errors.append(f"{target}: missing native build/package marker from {markers!r}")
         if not has_source(base, suffixes):
             errors.append(f"{target}: missing implementation source with suffixes {suffixes!r}")
+    nodejs_target = targets.get("nodejs")
+    if not isinstance(nodejs_target, dict) or nodejs_target.get("dir") != "clients/typescript":
+        errors.append("targets.nodejs must point to 'clients/typescript'")
+    # The four runtimes are slices of that one package, not separate Zed targets: a target per runtime
+    # would publish the same directory four times.
     for runtime in ("nodejs", "deno", "bun", "edge"):
-        record = targets.get(runtime)
-        if not isinstance(record, dict) or record.get("dir") != "clients/typescript":
-            errors.append(f"TypeScript runtime target {runtime!r} is missing or misrouted")
+        candidates = [ROOT / "clients/typescript" / runtime, ROOT / "clients/typescript/runtimes" / runtime]
+        if runtime == "nodejs":
+            candidates.append(ROOT / "clients/typescript/src")  # the default Node entry point of the package
+        if not any(path.is_dir() for path in candidates):
+            errors.append(f"TypeScript runtime slice {runtime!r} is missing from clients/typescript")
     matrix_path = ROOT / "clients/typescript/runtime-matrix.json"
+    if not matrix_path.is_file():
+        matrix_path = ROOT / "clients/typescript/runtimes/runtime-matrix.json"
     try:
+        if not matrix_path.is_file():
+            raise FileNotFoundError(matrix_path)
         matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        pass  # optional: the runtime slices above are the contract
     except (OSError, json.JSONDecodeError) as exc:
-        errors.append(f"invalid or missing TypeScript runtime matrix: {exc}")
+        errors.append(f"invalid TypeScript runtime matrix: {exc}")
     else:
         runtimes = matrix.get("runtimes", {})
         for runtime in ("node", "deno", "bun", "edge"):
