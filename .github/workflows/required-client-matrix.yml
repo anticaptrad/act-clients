@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with: {python-version: '3.12'}
       - run: python3 scripts/verify-client-matrix.py
+      - name: Validate every SDK against the JSON-Schema API contract
+        run: |
+          python3 -m pip install --disable-pip-version-check jsonschema==4.25.1
+          python3 scripts/verify_client_contract.py
       - run: cc -std=c11 -Wall -Wextra -Werror -c clients/c/act_client.c -o /tmp/act_client.o
       - run: printf '#include "clients/cpp/act_client.hpp"\nint main(){ anticaptrad::Client c("https://example.invalid"); return c.health_url().empty(); }\n' | c++ -std=c++20 -Wall -Wextra -Werror -I. -x c++ - -o /tmp/act_cpp
       - run: node --check clients/typescript/src/index.js && node --check clients/typescript/src/edge.js
