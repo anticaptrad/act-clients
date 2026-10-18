@@ -1,0 +1,10 @@
+{
+  "contract": "act.wit-client-candidate.v1",
+  "maxTextUtf8Bytes": 65536,
+  "maxRequestIdBytes": 128,
+  "requiresPostDecodeValidation": true,
+  "productionEnabled": false,
+  "peerTypeSpecJsonSchemaVerified": false,
+  "world": "anticaptrad:client/act-client@0.1.0",
+  "note": "WIT syntax/interface presence only; not yet compiled by wit-parser, not equivalent to product TypeSpec and JSON Schema authorities"
+}
