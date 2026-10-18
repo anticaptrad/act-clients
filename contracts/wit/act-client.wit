@@ -1,0 +1,20 @@
+package anticaptrad:client@0.1.0;
+
+/// Additive, strictly client-side projection: strings and bytes have bounded
+/// semantic limits enforced by a generated adapter, not by WIT itself.
+interface translation {
+  record request {
+    request-id: string,
+    source-language: string,
+    target-language: string,
+    text: string,
+  }
+  variant outcome {
+    accepted(string),
+    rejected(string),
+  }
+  translate: func(request: request) -> outcome;
+}
+world act-client {
+  export translation;
+}
