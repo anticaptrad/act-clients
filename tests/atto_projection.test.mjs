@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 const read = (path) => readFileSync(new URL("../" + path, import.meta.url), "utf8");
-const manifest = JSON.parse(read("clients/atto/candidate.json"));
-const source = read("clients/atto/status_probe.atto");
+const manifest = JSON.parse(read("language-candidates/atto/candidate.json"));
+const source = read("language-candidates/atto/status_probe.atto");
 const ts = read("clients/typescript/src/index.js");
 
 // Parse only the deliberately restricted fixture shape. Any syntax drift
@@ -29,6 +29,7 @@ function candidateErrors(candidate, attoSource) {
   want(candidate.compilerEvidence === "unverified", "no unproved compiler evidence");
   want(candidate.runtimeHttpClient === false && candidate.zedPublishing === false, "do not publish an incomplete SDK");
   want(candidate.contractAuthority === "clients/api-surface.json", "canonical authority");
+  want(candidate.source === "language-candidates/atto/status_probe.atto", "candidate source path");
   want(JSON.stringify(candidate.endpoints) === JSON.stringify(["/health", "/ready"]), "public endpoints only");
   const success = statusBounds(attoSource, "is_success_status");
   const redirect = statusBounds(attoSource, "is_redirect_status");
