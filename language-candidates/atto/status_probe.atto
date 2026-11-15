@@ -1,0 +1,30 @@
+// Candidate AttoLang projection of the public /health and /ready HTTP status rules.
+// No HTTP runtime or credential handling is implemented by this source file.
+// Not yet compiler/runtime certified; see candidate.json.
+fnc is_success_status(int status): bool {
+  if status < 200 then
+    return false;
+  fi
+  return status < 300;
+}
+
+fnc is_redirect_status(int status): bool {
+  if status < 300 then
+    return false;
+  fi
+  return status < 400;
+}
+
+pub fnc main(): int {
+  if is_success_status(200) then
+    if is_success_status(299) then
+      if is_success_status(302) then
+        return 1;
+      fi
+      if is_redirect_status(302) then
+        return 0;
+      fi
+    fi
+  fi
+  return 2;
+}
