@@ -2,14 +2,14 @@ name: AttoLang candidate contract
 on:
   pull_request:
     paths:
-      - 'clients/atto/**'
+      - 'language-candidates/atto/**'
       - 'tests/atto_projection.test.mjs'
       - 'clients/typescript/src/index.js'
       - '.github/workflows/atto-projection.yml'
   push:
     branches: [main]
     paths:
-      - 'clients/atto/**'
+      - 'language-candidates/atto/**'
       - 'tests/atto_projection.test.mjs'
       - 'clients/typescript/src/index.js'
       - '.github/workflows/atto-projection.yml'
