@@ -1,0 +1,33 @@
+name: AttoLang candidate contract
+on:
+  pull_request:
+    paths:
+      - 'language-candidates/atto/**'
+      - 'tests/atto_projection.test.mjs'
+      - 'tests/atto_projection.rs'
+      - 'clients/typescript/src/index.js'
+      - '.github/workflows/atto-projection.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'language-candidates/atto/**'
+      - 'tests/atto_projection.test.mjs'
+      - 'clients/typescript/src/index.js'
+      - '.github/workflows/atto-projection.yml'
+permissions:
+  contents: read
+jobs:
+  candidate-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30
+        with:
+          toolchain: stable
+      - name: Verify Atto candidate with Rust
+        run: |
+          rustc --edition=2021 --test tests/atto_projection.rs -o "$RUNNER_TEMP/atto-projection-tests"
+          "$RUNNER_TEMP/atto-projection-tests"
