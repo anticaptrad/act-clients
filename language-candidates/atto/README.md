@@ -11,6 +11,6 @@ targets, or the required-target count before the Rust/Wasm Atto compiler emits
 and executes this fixture and the full client implementation satisfies
 contract-admission, transport, error, and schema-parity checks.
 
-Run `node --test tests/atto_projection.test.mjs` from the repository root
+Run `rustc --edition=2021 --test tests/atto_projection.rs -o /tmp/atto-projection-tests && /tmp/atto-projection-tests` from the repository root
 to check the candidate against existing runtime rules and negative canaries.
 This is **source/manifest boundary validation**, not Atto compiler verification.
