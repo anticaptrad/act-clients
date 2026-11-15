@@ -44,18 +44,18 @@ function candidateErrors(candidate, attoSource) {
     want(redirect[1] === candidate.statusPolicy?.redirectMaxExclusive, "redirect upper bound");
     want(redirect[0] === 300 && redirect[1] === 400, "redirect boundary");
   }
-  want(/pub fnc main\\(\\): int \\{/.test(attoSource), "executable entry signature");
+  want(attoSource.includes("pub fnc main(): int {"), "executable entry signature");
   want(!/bearerToken|Authorization|\/admin|secret[_-]?key/i.test(attoSource), "no credentials or admin interface");
   return errors;
 }
 
 test("AttoLang candidate is fail-closed and matches public HTTP probe rules", () => {
   assert.deepEqual(candidateErrors(manifest, source), []);
-  assert.match(ts, /health\\(\\)\\s*\\{\\s*return this\\.#get\\("\/health"\\)/);
-  assert.match(ts, /ready\\(\\)\\s*\\{\\s*return this\\.#get\\("\/ready"\\)/);
+  assert.ok(ts.includes("health() {") && ts.includes('return this.#get("/health");'));
+  assert.ok(ts.includes("ready() {") && ts.includes('return this.#get("/ready");'));
   assert.match(ts, /redirect: "manual"/);
-  assert.match(ts, /response\\.status >= 300 && response\\.status < 400/);
-  assert.match(ts, /!response\\.ok/);
+  assert.ok(ts.includes("response.status >= 300 && response.status < 400"));
+  assert.ok(ts.includes("!response.ok"));
 });
 
 test("AttoLang contract mismatch and unauthorized promotion are rejected", () => {
