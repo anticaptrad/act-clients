@@ -4,6 +4,7 @@ on:
     paths:
       - 'language-candidates/atto/**'
       - 'tests/atto_projection.test.mjs'
+      - 'tests/atto_projection.rs'
       - 'clients/typescript/src/index.js'
       - '.github/workflows/atto-projection.yml'
   push:
@@ -23,7 +24,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30
         with:
-          node-version: '22'
-      - run: node --test tests/atto_projection.test.mjs
+          toolchain: stable
+      - name: Verify Atto candidate with Rust
+        run: |
+          rustc --edition=2021 --test tests/atto_projection.rs -o "$RUNNER_TEMP/atto-projection-tests"
+          "$RUNNER_TEMP/atto-projection-tests"
