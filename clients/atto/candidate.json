@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "language": "atto",
+  "source": "clients/atto/status_probe.atto",
+  "status": "candidate",
+  "compilerEvidence": "unverified",
+  "runtimeHttpClient": false,
+  "zedPublishing": false,
+  "contractAuthority": "clients/api-surface.json",
+  "endpoints": [
+    "/health",
+    "/ready"
+  ],
+  "statusPolicy": {
+    "successMinInclusive": 200,
+    "successMaxExclusive": 300,
+    "redirectMinInclusive": 300,
+    "redirectMaxExclusive": 400
+  }
+}
